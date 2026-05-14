@@ -15,6 +15,7 @@ public class MwTextBox : UserControl
     private const int FooterAreaHeight = 24;
     private const int BottomSafeArea = 4;
     private const int InnerTextBoxHeight = 24;
+    private string _placeholderText = string.Empty;
 
     private bool _readOnly;
 
@@ -85,8 +86,13 @@ public class MwTextBox : UserControl
     [DefaultValue("")]
     public string PlaceholderText
     {
-        get => _textBox.PlaceholderText;
-        set => _textBox.PlaceholderText = value;
+        get => _placeholderText;
+        set
+        {
+            _placeholderText = value;
+            ApplyPlaceholderText();
+            Invalidate();
+        }
     }
 
     [Category("ModernWinFormsUI")]
@@ -221,6 +227,7 @@ public class MwTextBox : UserControl
             OnTextChanged(EventArgs.Empty);
         };
 
+        ApplyPlaceholderText();
         Controls.Add(_textBox);
 
         ApplyRecommendedHeight();
@@ -244,6 +251,14 @@ public class MwTextBox : UserControl
         _textBox.Focus();
     }
 
+    private void ApplyPlaceholderText()
+    {
+        #if NET48
+            NativeMethods.SetCueBanner(_textBox, _placeholderText);
+        #else
+                _textBox.PlaceholderText = _placeholderText;
+        #endif
+    }
     protected override void OnEnabledChanged(EventArgs e)
     {
         base.OnEnabledChanged(e);
@@ -433,4 +448,29 @@ public class MwTextBox : UserControl
 
         return MwColors.Page;
     }
+
+        #if NET48
+        internal static class NativeMethods
+        {
+            private const int EM_SETCUEBANNER = 0x1501;
+
+            [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Unicode)]
+            private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, string lParam);
+
+            public static void SetCueBanner(TextBox textBox, string placeholderText)
+            {
+                if (textBox.IsHandleCreated)
+                {
+                    SendMessage(textBox.Handle, EM_SETCUEBANNER, IntPtr.Zero, placeholderText);
+                    return;
+                }
+
+                textBox.HandleCreated += (_, _) =>
+                {
+                    SendMessage(textBox.Handle, EM_SETCUEBANNER, IntPtr.Zero, placeholderText);
+                };
+            }
+        }
+        #endif
+
 }
