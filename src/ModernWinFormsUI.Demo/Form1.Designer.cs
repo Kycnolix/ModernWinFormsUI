@@ -49,10 +49,14 @@
             alertSuccessDemo = new ModernWinFormsUI.Controls.MwAlert();
             lblFooter = new Label();
             lblVersion = new Label();
+            segmentedByNumber = new ModernWinFormsUI.Controls.MwSegmentedButton();
+            SegmentedButtons = new ModernWinFormsUI.Controls.MwCard();
+            segmentedByName = new ModernWinFormsUI.Controls.MwSegmentedButton();
             cardButtons.SuspendLayout();
             cardInputs.SuspendLayout();
             cardBadges.SuspendLayout();
             cardAlerts.SuspendLayout();
+            SegmentedButtons.SuspendLayout();
             SuspendLayout();
             // 
             // lblTitle
@@ -159,6 +163,7 @@
             btnPrimaryDemo.Text = "Primary";
             btnPrimaryDemo.UseVisualStyleBackColor = false;
             btnPrimaryDemo.Variant = ModernWinFormsUI.Controls.MwButtonVariant.Primary;
+            btnPrimaryDemo.Click += btnPrimaryDemo_Click;
             // 
             // cardInputs
             // 
@@ -323,7 +328,7 @@
             lblFooter.AutoSize = true;
             lblFooter.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 162);
             lblFooter.ForeColor = Color.FromArgb(107, 114, 128);
-            lblFooter.Location = new Point(18, 538);
+            lblFooter.Location = new Point(18, 769);
             lblFooter.Name = "lblFooter";
             lblFooter.Size = new Size(411, 15);
             lblFooter.TabIndex = 9;
@@ -334,17 +339,66 @@
             lblVersion.AutoSize = true;
             lblVersion.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 162);
             lblVersion.ForeColor = Color.FromArgb(75, 85, 99);
-            lblVersion.Location = new Point(1069, 538);
+            lblVersion.Location = new Point(1065, 769);
             lblVersion.Name = "lblVersion";
             lblVersion.Size = new Size(41, 15);
             lblVersion.TabIndex = 10;
-            lblVersion.Text = "v0.1.0";
+            lblVersion.Text = "v0.1.1";
+            // 
+            // segmentedByNumber
+            // 
+            segmentedByNumber.FlatAppearance.BorderSize = 0;
+            segmentedByNumber.FlatStyle = FlatStyle.Flat;
+            segmentedByNumber.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+            segmentedByNumber.IconText = "*";
+            segmentedByNumber.Location = new Point(19, 67);
+            segmentedByNumber.Name = "segmentedByNumber";
+            segmentedByNumber.Padding = new Padding(16, 0, 16, 0);
+            segmentedByNumber.Selected = true;
+            segmentedByNumber.Size = new Size(226, 40);
+            segmentedByNumber.TabIndex = 11;
+            segmentedByNumber.Text = " TC / Öğrenci No";
+            segmentedByNumber.UseVisualStyleBackColor = false;
+            segmentedByNumber.Click += segmentedByNumber_Click;
+            // 
+            // SegmentedButtons
+            // 
+            SegmentedButtons.BackColor = Color.Transparent;
+            SegmentedButtons.BorderColor = Color.FromArgb(218, 224, 235);
+            SegmentedButtons.CardBackColor = Color.FromArgb(255, 255, 255);
+            SegmentedButtons.Controls.Add(segmentedByName);
+            SegmentedButtons.Controls.Add(segmentedByNumber);
+            SegmentedButtons.Location = new Point(18, 546);
+            SegmentedButtons.Margin = new Padding(8);
+            SegmentedButtons.Name = "SegmentedButtons";
+            SegmentedButtons.Padding = new Padding(16, 64, 16, 16);
+            SegmentedButtons.Radius = 14;
+            SegmentedButtons.Size = new Size(499, 141);
+            SegmentedButtons.SubTitle = "";
+            SegmentedButtons.TabIndex = 12;
+            SegmentedButtons.Title = "SegmentedButtons";
+            // 
+            // segmentedByName
+            // 
+            segmentedByName.FlatAppearance.BorderSize = 0;
+            segmentedByName.FlatStyle = FlatStyle.Flat;
+            segmentedByName.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+            segmentedByName.IconText = "*";
+            segmentedByName.Location = new Point(251, 67);
+            segmentedByName.Name = "segmentedByName";
+            segmentedByName.Padding = new Padding(16, 0, 16, 0);
+            segmentedByName.Size = new Size(226, 40);
+            segmentedByName.TabIndex = 12;
+            segmentedByName.Text = "Ad / Soyad";
+            segmentedByName.UseVisualStyleBackColor = false;
+            segmentedByName.Click += segmentedByName_Click;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1120, 562);
+            ClientSize = new Size(1120, 793);
+            Controls.Add(SegmentedButtons);
             Controls.Add(lblVersion);
             Controls.Add(lblFooter);
             Controls.Add(cardAlerts);
@@ -362,6 +416,7 @@
             cardInputs.ResumeLayout(false);
             cardBadges.ResumeLayout(false);
             cardAlerts.ResumeLayout(false);
+            SegmentedButtons.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -388,5 +443,8 @@
         private Controls.MwAlert alertSuccessDemo;
         private Label lblFooter;
         private Label lblVersion;
+        private Controls.MwSegmentedButton segmentedByNumber;
+        private Controls.MwCard SegmentedButtons;
+        private Controls.MwSegmentedButton segmentedByName;
     }
 }
