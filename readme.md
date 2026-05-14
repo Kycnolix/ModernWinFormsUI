@@ -12,6 +12,7 @@ ModernWinFormsUI is a lightweight modern UI component library for building clean
 - Custom button, card, text box, badge and alert components
 - Lightweight and dependency-free
 - Built for .NET 8 Windows Forms
+- Segmented button component for selection-based UI patterns
 
 ## Components
 
@@ -20,6 +21,7 @@ ModernWinFormsUI is a lightweight modern UI component library for building clean
 - `MwTextBox`
 - `MwBadge`
 - `MwAlert`
+- `MwSegmentedButton`
 
 ## Quick Example
 
@@ -33,6 +35,15 @@ var button = new MwButton
     ButtonSize = MwButtonSize.Medium,
     Width = 120
 };
+
+var segmentedButton = new MwSegmentedButton
+{
+    Text = "TC / Öğrenci No",
+    IconText = "●",
+    Selected = true,
+    Width = 180
+};
+
 Project Status
 
 This project is currently in early development.

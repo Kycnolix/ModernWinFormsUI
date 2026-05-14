@@ -350,16 +350,14 @@
             segmentedByNumber.FlatAppearance.BorderSize = 0;
             segmentedByNumber.FlatStyle = FlatStyle.Flat;
             segmentedByNumber.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
-            segmentedByNumber.IconText = "*";
             segmentedByNumber.Location = new Point(19, 67);
             segmentedByNumber.Name = "segmentedByNumber";
             segmentedByNumber.Padding = new Padding(16, 0, 16, 0);
             segmentedByNumber.Selected = true;
             segmentedByNumber.Size = new Size(226, 40);
             segmentedByNumber.TabIndex = 11;
-            segmentedByNumber.Text = " TC / Öğrenci No";
+            segmentedByNumber.Text = "Student NO";
             segmentedByNumber.UseVisualStyleBackColor = false;
-            segmentedByNumber.Click += segmentedByNumber_Click;
             // 
             // SegmentedButtons
             // 
@@ -383,15 +381,13 @@
             segmentedByName.FlatAppearance.BorderSize = 0;
             segmentedByName.FlatStyle = FlatStyle.Flat;
             segmentedByName.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
-            segmentedByName.IconText = "*";
             segmentedByName.Location = new Point(251, 67);
             segmentedByName.Name = "segmentedByName";
             segmentedByName.Padding = new Padding(16, 0, 16, 0);
             segmentedByName.Size = new Size(226, 40);
             segmentedByName.TabIndex = 12;
-            segmentedByName.Text = "Ad / Soyad";
+            segmentedByName.Text = "Name / Surname";
             segmentedByName.UseVisualStyleBackColor = false;
-            segmentedByName.Click += segmentedByName_Click;
             // 
             // MainForm
             // 
