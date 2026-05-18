@@ -13,6 +13,7 @@ ModernWinFormsUI is a lightweight modern UI component library for building clean
 - Lightweight and dependency-free
 - Built for .NET 8 Windows Forms
 - Segmented button component for selection-based UI patterns
+- Modern picture box component for image previews, avatars and blank states
 
 ## Components
 
@@ -22,6 +23,7 @@ ModernWinFormsUI is a lightweight modern UI component library for building clean
 - `MwBadge`
 - `MwAlert`
 - `MwSegmentedButton`
+- `MwPictureBox`
 
 ## Quick Example
 
@@ -44,13 +46,23 @@ var segmentedButton = new MwSegmentedButton
     Width = 180
 };
 
+var pictureBox = new MwPictureBox
+{
+    EmptyState = MwPictureBoxEmptyState.Initials,
+    Initials = "AY",
+    Shape = MwPictureBoxShape.Circle,
+    Fit = MwPictureBoxFit.Cover,
+    Width = 80,
+    Height = 80
+};
+
 Project Status
 
 This project is currently in early development.
 
 Current version:
 
-v0.1.0
+v0.3.0
 Roadmap
 Add MwComboBox
 Add MwStatusBar

@@ -4,6 +4,19 @@
 
 All notable changes to this project will be documented in this file.
 
+\## \[0.3.0] - 2026-05-18
+
+
+\### Added
+
+
+- `MwPictureBox` component
+  - Blank empty state
+  - Placeholder text empty state
+  - Initials empty state
+  - Rounded rectangle and circle shapes
+  - Contain, cover and stretch image fit modes
+  - Border and background customization
 
 
 \## \[0.2.0] - 2026-05-14

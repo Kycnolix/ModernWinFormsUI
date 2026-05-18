@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             lblTitle = new Label();
             lblDescription = new Label();
             cardButtons = new ModernWinFormsUI.Controls.MwCard();
@@ -52,11 +53,14 @@
             segmentedByNumber = new ModernWinFormsUI.Controls.MwSegmentedButton();
             SegmentedButtons = new ModernWinFormsUI.Controls.MwCard();
             segmentedByName = new ModernWinFormsUI.Controls.MwSegmentedButton();
+            cardPictureBox = new ModernWinFormsUI.Controls.MwCard();
+            mwPictureBox1 = new ModernWinFormsUI.Controls.MwPictureBox();
             cardButtons.SuspendLayout();
             cardInputs.SuspendLayout();
             cardBadges.SuspendLayout();
             cardAlerts.SuspendLayout();
             SegmentedButtons.SuspendLayout();
+            cardPictureBox.SuspendLayout();
             SuspendLayout();
             // 
             // lblTitle
@@ -343,14 +347,14 @@
             lblVersion.Name = "lblVersion";
             lblVersion.Size = new Size(41, 15);
             lblVersion.TabIndex = 10;
-            lblVersion.Text = "v0.1.1";
+            lblVersion.Text = "v0.3.0";
             // 
             // segmentedByNumber
             // 
             segmentedByNumber.FlatAppearance.BorderSize = 0;
             segmentedByNumber.FlatStyle = FlatStyle.Flat;
             segmentedByNumber.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
-            segmentedByNumber.Location = new Point(19, 67);
+            segmentedByNumber.Location = new Point(19, 85);
             segmentedByNumber.Name = "segmentedByNumber";
             segmentedByNumber.Padding = new Padding(16, 0, 16, 0);
             segmentedByNumber.Selected = true;
@@ -371,7 +375,7 @@
             SegmentedButtons.Name = "SegmentedButtons";
             SegmentedButtons.Padding = new Padding(16, 64, 16, 16);
             SegmentedButtons.Radius = 14;
-            SegmentedButtons.Size = new Size(499, 141);
+            SegmentedButtons.Size = new Size(499, 190);
             SegmentedButtons.SubTitle = "";
             SegmentedButtons.TabIndex = 12;
             SegmentedButtons.Title = "SegmentedButtons";
@@ -381,7 +385,7 @@
             segmentedByName.FlatAppearance.BorderSize = 0;
             segmentedByName.FlatStyle = FlatStyle.Flat;
             segmentedByName.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
-            segmentedByName.Location = new Point(251, 67);
+            segmentedByName.Location = new Point(251, 85);
             segmentedByName.Name = "segmentedByName";
             segmentedByName.Padding = new Padding(16, 0, 16, 0);
             segmentedByName.Size = new Size(226, 40);
@@ -389,11 +393,43 @@
             segmentedByName.Text = "Name / Surname";
             segmentedByName.UseVisualStyleBackColor = false;
             // 
+            // cardPictureBox
+            // 
+            cardPictureBox.BackColor = Color.Transparent;
+            cardPictureBox.BorderColor = Color.FromArgb(218, 224, 235);
+            cardPictureBox.CardBackColor = Color.FromArgb(255, 255, 255);
+            cardPictureBox.Controls.Add(mwPictureBox1);
+            cardPictureBox.Location = new Point(607, 546);
+            cardPictureBox.Margin = new Padding(8);
+            cardPictureBox.Name = "cardPictureBox";
+            cardPictureBox.Padding = new Padding(16, 64, 16, 16);
+            cardPictureBox.Radius = 14;
+            cardPictureBox.Size = new Size(499, 190);
+            cardPictureBox.SubTitle = "Image preview container with blank, text and initials states.\n";
+            cardPictureBox.TabIndex = 13;
+            cardPictureBox.Title = "Picture Box";
+            // 
+            // mwPictureBox1
+            // 
+            mwPictureBox1.BackColor = Color.Transparent;
+            mwPictureBox1.BorderColor = Color.FromArgb(218, 224, 235);
+            mwPictureBox1.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+            mwPictureBox1.Image = (Image)resources.GetObject("mwPictureBox1.Image");
+            mwPictureBox1.Location = new Point(202, 60);
+            mwPictureBox1.MinimumSize = new Size(48, 48);
+            mwPictureBox1.Name = "mwPictureBox1";
+            mwPictureBox1.PictureBackColor = Color.FromArgb(255, 255, 255);
+            mwPictureBox1.Size = new Size(99, 111);
+            mwPictureBox1.TabIndex = 0;
+            mwPictureBox1.TabStop = false;
+            mwPictureBox1.Text = "mwPictureBox1";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1120, 793);
+            ClientSize = new Size(1127, 793);
+            Controls.Add(cardPictureBox);
             Controls.Add(SegmentedButtons);
             Controls.Add(lblVersion);
             Controls.Add(lblFooter);
@@ -413,6 +449,7 @@
             cardBadges.ResumeLayout(false);
             cardAlerts.ResumeLayout(false);
             SegmentedButtons.ResumeLayout(false);
+            cardPictureBox.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -442,5 +479,7 @@
         private Controls.MwSegmentedButton segmentedByNumber;
         private Controls.MwCard SegmentedButtons;
         private Controls.MwSegmentedButton segmentedByName;
+        private Controls.MwCard cardPictureBox;
+        private Controls.MwPictureBox mwPictureBox1;
     }
 }
