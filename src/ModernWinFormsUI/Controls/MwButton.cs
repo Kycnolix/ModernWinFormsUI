@@ -11,6 +11,9 @@ public class MwButton : Button
 {
     private bool _isHovered;
     private bool _isPressed;
+    private Image? _iconImage;
+    private int _iconSize = 18;
+    private int _iconGap = 8;
 
     private MwButtonVariant _variant = MwButtonVariant.Primary;
     private MwButtonSize _buttonSize = MwButtonSize.Medium;
@@ -48,6 +51,147 @@ public class MwButton : Button
             _radius = value;
             Invalidate();
         }
+    }
+
+    [Category("ModernWinFormsUI")]
+    [Description("Image displayed before the button text. Recommended: transparent PNG or ICO.")]
+    [Browsable(true)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [DefaultValue(null)]
+    public Image? IconImage
+    {
+        get => _iconImage;
+        set
+        {
+            _iconImage = value;
+            Invalidate();
+        }
+    }
+
+    [Category("ModernWinFormsUI")]
+    [Description("Size of the button icon image.")]
+    [Browsable(true)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [DefaultValue(18)]
+    public int IconSize
+    {
+        get => _iconSize;
+        set
+        {
+            _iconSize = ClampInt(value, 12, 40);
+            Invalidate();
+        }
+    }
+
+    [Category("ModernWinFormsUI")]
+    [Description("Space between icon and text.")]
+    [Browsable(true)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    [DefaultValue(8)]
+    public int IconGap
+    {
+        get => _iconGap;
+        set
+        {
+            _iconGap = ClampInt(value, 0, 24);
+            Invalidate();
+        }
+    }
+
+    private static int ClampInt(int value, int min, int max)
+    {
+        if (value < min)
+            return min;
+
+        if (value > max)
+            return max;
+
+        return value;
+    }
+
+    private static void DrawIconImage(Graphics graphics, Image image, Rectangle rect, bool enabled)
+    {
+        graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+        graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+        if (enabled)
+        {
+            graphics.DrawImage(image, rect);
+            return;
+        }
+
+        using var imageAttributes = new System.Drawing.Imaging.ImageAttributes();
+
+        var colorMatrix = new System.Drawing.Imaging.ColorMatrix
+        {
+            Matrix33 = 0.45f
+        };
+
+        imageAttributes.SetColorMatrix(colorMatrix);
+
+        graphics.DrawImage(
+            image,
+            rect,
+            0,
+            0,
+            image.Width,
+            image.Height,
+            GraphicsUnit.Pixel,
+            imageAttributes
+        );
+    }
+
+    private void DrawContent(Graphics graphics, Rectangle rect, Color textColor)
+    {
+        if (IconImage is not null)
+        {
+            int iconSize = Math.Min(IconSize, rect.Height - 12);
+
+            Size textSize = TextRenderer.MeasureText(Text, Font);
+
+            int totalWidth = iconSize + IconGap + textSize.Width;
+            int startX = rect.Left + Math.Max(0, (rect.Width - totalWidth) / 2);
+
+            var iconRect = new Rectangle(
+                startX,
+                rect.Top + (rect.Height - iconSize) / 2,
+                iconSize,
+                iconSize
+            );
+
+            var textRect = new Rectangle(
+                iconRect.Right + IconGap,
+                rect.Top,
+                Math.Max(0, rect.Right - iconRect.Right - IconGap),
+                rect.Height
+            );
+
+            DrawIconImage(graphics, IconImage, iconRect, Enabled);
+
+            TextRenderer.DrawText(
+                graphics,
+                Text,
+                Font,
+                textRect,
+                textColor,
+                TextFormatFlags.Left |
+                TextFormatFlags.VerticalCenter |
+                TextFormatFlags.EndEllipsis
+            );
+
+            return;
+        }
+
+        TextRenderer.DrawText(
+            graphics,
+            Text,
+            Font,
+            rect,
+            textColor,
+            TextFormatFlags.HorizontalCenter |
+            TextFormatFlags.VerticalCenter |
+            TextFormatFlags.EndEllipsis
+        );
     }
 
     public MwButton()
@@ -129,40 +273,24 @@ public class MwButton : Button
     {
         var graphics = pevent.Graphics;
         graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
         graphics.Clear(GetEffectiveParentBackColor());
 
         var rect = new Rectangle(0, 0, Width - 1, Height - 1);
 
-        var backgroundColor = GetBackgroundColor();
-        var borderColor = GetBorderColor();
-        var textColor = GetTextColor();
-
         using var path = GraphicsHelper.CreateRoundedRectangle(rect, Radius);
-        using var backgroundBrush = new SolidBrush(backgroundColor);
-        using var borderPen = new Pen(borderColor, 1);
+        using var backgroundBrush = new SolidBrush(GetBackgroundColor());
+        using var borderPen = new Pen(GetBorderColor(), 1);
 
         graphics.FillPath(backgroundBrush, path);
+        graphics.DrawPath(borderPen, path);
 
-        if (Variant == MwButtonVariant.Secondary || Variant == MwButtonVariant.Ghost)
-        {
-            graphics.DrawPath(borderPen, path);
-        }
+        var textColor = GetTextColor();
 
-        TextRenderer.DrawText(
-            graphics,
-            Text,
-            Font,
-            rect,
-            textColor,
-            TextFormatFlags.HorizontalCenter |
-            TextFormatFlags.VerticalCenter |
-            TextFormatFlags.EndEllipsis
-        );
+        DrawContent(graphics, rect, textColor);
 
         if (Focused && Enabled)
-        {
             DrawFocusRing(graphics);
-        }
     }
 
     private void ApplySize()

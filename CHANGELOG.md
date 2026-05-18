@@ -4,6 +4,28 @@
 
 All notable changes to this project will be documented in this file.
 
+\## \[0.4.0] - 2026-05-18
+
+\### Added
+
+- `MwComboBox` component
+  - Custom drawn closed state
+  - Dropdown list support
+  - Placeholder text support
+  - Image icon support
+  - Configurable icon size and icon gap
+  - Focus, hover and disabled states
+
+- `MwDataGridView` component
+  - Modern table styling
+  - Configurable header background and text colors
+  - Configurable row and alternating row colors
+  - Configurable grid line color
+  - Configurable empty background color
+  - Configurable outer border color
+  - Configurable row height and header height
+  - Rounded outer border support
+
 \## \[0.3.0] - 2026-05-18
 
 

@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             lblTitle = new Label();
             lblDescription = new Label();
             cardButtons = new ModernWinFormsUI.Controls.MwCard();
@@ -46,6 +50,8 @@
             badgeSuccess = new ModernWinFormsUI.Controls.MwBadge();
             badgeNeutral = new ModernWinFormsUI.Controls.MwBadge();
             cardAlerts = new ModernWinFormsUI.Controls.MwCard();
+            mwAlert2 = new ModernWinFormsUI.Controls.MwAlert();
+            mwAlert1 = new ModernWinFormsUI.Controls.MwAlert();
             alertWarningDemo = new ModernWinFormsUI.Controls.MwAlert();
             alertSuccessDemo = new ModernWinFormsUI.Controls.MwAlert();
             lblFooter = new Label();
@@ -55,12 +61,19 @@
             segmentedByName = new ModernWinFormsUI.Controls.MwSegmentedButton();
             cardPictureBox = new ModernWinFormsUI.Controls.MwCard();
             mwPictureBox1 = new ModernWinFormsUI.Controls.MwPictureBox();
+            cardComboBox = new ModernWinFormsUI.Controls.MwCard();
+            comboPrinter = new ModernWinFormsUI.Controls.MwComboBox();
+            cardStudents = new ModernWinFormsUI.Controls.MwCard();
+            gridStudents = new ModernWinFormsUI.Controls.MwDataGridView();
             cardButtons.SuspendLayout();
             cardInputs.SuspendLayout();
             cardBadges.SuspendLayout();
             cardAlerts.SuspendLayout();
             SegmentedButtons.SuspendLayout();
             cardPictureBox.SuspendLayout();
+            cardComboBox.SuspendLayout();
+            cardStudents.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gridStudents).BeginInit();
             SuspendLayout();
             // 
             // lblTitle
@@ -158,6 +171,8 @@
             btnPrimaryDemo.FlatAppearance.BorderSize = 0;
             btnPrimaryDemo.FlatStyle = FlatStyle.Flat;
             btnPrimaryDemo.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+            btnPrimaryDemo.IconGap = 0;
+            btnPrimaryDemo.IconSize = 20;
             btnPrimaryDemo.Location = new Point(19, 90);
             btnPrimaryDemo.Name = "btnPrimaryDemo";
             btnPrimaryDemo.Padding = new Padding(16, 0, 16, 0);
@@ -221,7 +236,7 @@
             cardBadges.Controls.Add(badgeWarning);
             cardBadges.Controls.Add(badgeSuccess);
             cardBadges.Controls.Add(badgeNeutral);
-            cardBadges.Location = new Point(607, 81);
+            cardBadges.Location = new Point(578, 81);
             cardBadges.Margin = new Padding(8);
             cardBadges.Name = "cardBadges";
             cardBadges.Padding = new Padding(16, 64, 16, 16);
@@ -290,22 +305,50 @@
             cardAlerts.BackColor = Color.Transparent;
             cardAlerts.BorderColor = Color.FromArgb(218, 224, 235);
             cardAlerts.CardBackColor = Color.FromArgb(255, 255, 255);
+            cardAlerts.Controls.Add(mwAlert2);
+            cardAlerts.Controls.Add(mwAlert1);
             cardAlerts.Controls.Add(alertWarningDemo);
             cardAlerts.Controls.Add(alertSuccessDemo);
-            cardAlerts.Location = new Point(607, 252);
+            cardAlerts.Location = new Point(578, 252);
             cardAlerts.Margin = new Padding(8);
             cardAlerts.Name = "cardAlerts";
             cardAlerts.Padding = new Padding(16, 64, 16, 16);
             cardAlerts.Radius = 14;
-            cardAlerts.Size = new Size(499, 268);
+            cardAlerts.Size = new Size(499, 484);
             cardAlerts.SubTitle = "Inline feedback messages for success, warning and error states.\n";
             cardAlerts.TabIndex = 8;
             cardAlerts.Title = "Alerts";
             // 
+            // mwAlert2
+            // 
+            mwAlert2.Font = new Font("Segoe UI", 9.5F);
+            mwAlert2.Location = new Point(19, 375);
+            mwAlert2.Message = "Please checkout your printer device";
+            mwAlert2.MinimumSize = new Size(220, 56);
+            mwAlert2.Name = "mwAlert2";
+            mwAlert2.Size = new Size(460, 73);
+            mwAlert2.TabIndex = 3;
+            mwAlert2.TabStop = false;
+            mwAlert2.Title = "Printer error";
+            mwAlert2.Variant = ModernWinFormsUI.Controls.MwAlertVariant.Danger;
+            // 
+            // mwAlert1
+            // 
+            mwAlert1.Font = new Font("Segoe UI", 9.5F);
+            mwAlert1.Location = new Point(19, 165);
+            mwAlert1.Message = "Please select a document for printing";
+            mwAlert1.MinimumSize = new Size(220, 56);
+            mwAlert1.Name = "mwAlert1";
+            mwAlert1.Size = new Size(460, 73);
+            mwAlert1.TabIndex = 2;
+            mwAlert1.TabStop = false;
+            mwAlert1.Title = "Printer selected";
+            mwAlert1.Variant = ModernWinFormsUI.Controls.MwAlertVariant.Success;
+            // 
             // alertWarningDemo
             // 
             alertWarningDemo.Font = new Font("Segoe UI", 9.5F);
-            alertWarningDemo.Location = new Point(19, 159);
+            alertWarningDemo.Location = new Point(19, 267);
             alertWarningDemo.Message = "Please select a printer before printing the card.\n";
             alertWarningDemo.MinimumSize = new Size(220, 56);
             alertWarningDemo.Name = "alertWarningDemo";
@@ -332,7 +375,7 @@
             lblFooter.AutoSize = true;
             lblFooter.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 162);
             lblFooter.ForeColor = Color.FromArgb(107, 114, 128);
-            lblFooter.Location = new Point(18, 769);
+            lblFooter.Location = new Point(18, 960);
             lblFooter.Name = "lblFooter";
             lblFooter.Size = new Size(411, 15);
             lblFooter.TabIndex = 9;
@@ -343,11 +386,11 @@
             lblVersion.AutoSize = true;
             lblVersion.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 162);
             lblVersion.ForeColor = Color.FromArgb(75, 85, 99);
-            lblVersion.Location = new Point(1065, 769);
+            lblVersion.Location = new Point(1803, 966);
             lblVersion.Name = "lblVersion";
             lblVersion.Size = new Size(41, 15);
             lblVersion.TabIndex = 10;
-            lblVersion.Text = "v0.3.0";
+            lblVersion.Text = "v0.4.0";
             // 
             // segmentedByNumber
             // 
@@ -399,7 +442,7 @@
             cardPictureBox.BorderColor = Color.FromArgb(218, 224, 235);
             cardPictureBox.CardBackColor = Color.FromArgb(255, 255, 255);
             cardPictureBox.Controls.Add(mwPictureBox1);
-            cardPictureBox.Location = new Point(607, 546);
+            cardPictureBox.Location = new Point(578, 752);
             cardPictureBox.Margin = new Padding(8);
             cardPictureBox.Name = "cardPictureBox";
             cardPictureBox.Padding = new Padding(16, 64, 16, 16);
@@ -424,11 +467,121 @@
             mwPictureBox1.TabStop = false;
             mwPictureBox1.Text = "mwPictureBox1";
             // 
+            // cardComboBox
+            // 
+            cardComboBox.BackColor = Color.Transparent;
+            cardComboBox.BorderColor = Color.FromArgb(218, 224, 235);
+            cardComboBox.CardBackColor = Color.FromArgb(255, 255, 255);
+            cardComboBox.Controls.Add(comboPrinter);
+            cardComboBox.Location = new Point(18, 752);
+            cardComboBox.Margin = new Padding(8);
+            cardComboBox.Name = "cardComboBox";
+            cardComboBox.Padding = new Padding(16, 64, 16, 16);
+            cardComboBox.Radius = 14;
+            cardComboBox.Size = new Size(499, 190);
+            cardComboBox.SubTitle = "Native selection behavior with modern label, helper and error states.\n";
+            cardComboBox.TabIndex = 14;
+            cardComboBox.Title = "Combo Box";
+            // 
+            // comboPrinter
+            // 
+            comboPrinter.BackColor = Color.Transparent;
+            comboPrinter.Font = new Font("Segoe UI", 9.5F);
+            comboPrinter.HelperText = "Select the student's department.\n";
+            comboPrinter.LabelText = "Department";
+            comboPrinter.Location = new Point(19, 77);
+            comboPrinter.MinimumSize = new Size(120, 42);
+            comboPrinter.Name = "comboPrinter";
+            comboPrinter.PlaceholderText = "Select a printer";
+            comboPrinter.Size = new Size(342, 96);
+            comboPrinter.TabIndex = 0;
+            // 
+            // cardStudents
+            // 
+            cardStudents.BackColor = Color.Transparent;
+            cardStudents.BorderColor = Color.FromArgb(218, 224, 235);
+            cardStudents.CardBackColor = Color.FromArgb(255, 255, 255);
+            cardStudents.Controls.Add(gridStudents);
+            cardStudents.Location = new Point(1136, 81);
+            cardStudents.Margin = new Padding(8);
+            cardStudents.Name = "cardStudents";
+            cardStudents.Padding = new Padding(16, 64, 16, 16);
+            cardStudents.Radius = 14;
+            cardStudents.Size = new Size(708, 409);
+            cardStudents.SubTitle = "Modern table styling with configurable colors, lines and row states.\n";
+            cardStudents.TabIndex = 15;
+            cardStudents.Title = "Data Grid View";
+            cardStudents.Paint += cardStudents_Paint;
+            // 
+            // gridStudents
+            // 
+            gridStudents.AllowUserToAddRows = false;
+            gridStudents.AllowUserToDeleteRows = false;
+            gridStudents.AllowUserToResizeRows = false;
+            gridStudents.AlternateRowBackColor = Color.FromArgb(248, 250, 252);
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(248, 250, 252);
+            dataGridViewCellStyle1.ForeColor = Color.FromArgb(17, 24, 39);
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(239, 246, 255);
+            dataGridViewCellStyle1.SelectionForeColor = Color.FromArgb(17, 24, 39);
+            gridStudents.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            gridStudents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            gridStudents.BackgroundColor = Color.White;
+            gridStudents.BorderStyle = BorderStyle.None;
+            gridStudents.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            gridStudents.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.White;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(17, 24, 39);
+            dataGridViewCellStyle2.Padding = new Padding(14, 0, 14, 0);
+            dataGridViewCellStyle2.SelectionBackColor = Color.White;
+            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(17, 24, 39);
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            gridStudents.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            gridStudents.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9.5F);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(17, 24, 39);
+            dataGridViewCellStyle3.Padding = new Padding(14, 0, 14, 0);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(239, 246, 255);
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(17, 24, 39);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            gridStudents.DefaultCellStyle = dataGridViewCellStyle3;
+            gridStudents.EmptyBackColor = Color.White;
+            gridStudents.EnableHeadersVisualStyles = false;
+            gridStudents.Font = new Font("Segoe UI", 9.5F);
+            gridStudents.GridColor = Color.FromArgb(226, 232, 240);
+            gridStudents.GridLineColor = Color.FromArgb(226, 232, 240);
+            gridStudents.HeaderBackColor = Color.White;
+            gridStudents.HeaderForeColor = Color.FromArgb(17, 24, 39);
+            gridStudents.Location = new Point(19, 67);
+            gridStudents.MultiSelect = false;
+            gridStudents.Name = "gridStudents";
+            gridStudents.OuterBorderColor = Color.FromArgb(226, 232, 240);
+            gridStudents.ReadOnly = true;
+            gridStudents.RowBackColor = Color.White;
+            gridStudents.RowForeColor = Color.FromArgb(17, 24, 39);
+            gridStudents.RowHeadersVisible = false;
+            dataGridViewCellStyle4.BackColor = Color.White;
+            dataGridViewCellStyle4.ForeColor = Color.FromArgb(17, 24, 39);
+            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(239, 246, 255);
+            dataGridViewCellStyle4.SelectionForeColor = Color.FromArgb(17, 24, 39);
+            gridStudents.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            gridStudents.RowTemplate.Height = 50;
+            gridStudents.SelectionBackColor = Color.FromArgb(239, 246, 255);
+            gridStudents.SelectionForeColor = Color.FromArgb(17, 24, 39);
+            gridStudents.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            gridStudents.Size = new Size(670, 314);
+            gridStudents.TabIndex = 0;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1127, 793);
+            ClientSize = new Size(1861, 987);
+            Controls.Add(cardStudents);
+            Controls.Add(cardComboBox);
             Controls.Add(cardPictureBox);
             Controls.Add(SegmentedButtons);
             Controls.Add(lblVersion);
@@ -444,12 +597,16 @@
             SizeGripStyle = SizeGripStyle.Hide;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "ModernWinFormsUI Demo";
+            Load += MainForm_Load;
             cardButtons.ResumeLayout(false);
             cardInputs.ResumeLayout(false);
             cardBadges.ResumeLayout(false);
             cardAlerts.ResumeLayout(false);
             SegmentedButtons.ResumeLayout(false);
             cardPictureBox.ResumeLayout(false);
+            cardComboBox.ResumeLayout(false);
+            cardStudents.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)gridStudents).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -481,5 +638,11 @@
         private Controls.MwSegmentedButton segmentedByName;
         private Controls.MwCard cardPictureBox;
         private Controls.MwPictureBox mwPictureBox1;
+        private Controls.MwCard cardComboBox;
+        private Controls.MwComboBox comboPrinter;
+        private Controls.MwAlert mwAlert2;
+        private Controls.MwAlert mwAlert1;
+        private Controls.MwCard cardStudents;
+        private Controls.MwDataGridView gridStudents;
     }
 }

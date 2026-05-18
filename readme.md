@@ -14,6 +14,10 @@ ModernWinFormsUI is a lightweight modern UI component library for building clean
 - Built for .NET 8 Windows Forms
 - Segmented button component for selection-based UI patterns
 - Modern picture box component for image previews, avatars and blank states
+- Modern combo box component with custom dropdown styling and image icon support
+- Modern data grid view component with configurable table colors, grid lines and row states
+- Image icon support for buttons and combo boxes
+
 
 ## Components
 
@@ -24,6 +28,8 @@ ModernWinFormsUI is a lightweight modern UI component library for building clean
 - `MwAlert`
 - `MwSegmentedButton`
 - `MwPictureBox`
+- `MwComboBox`
+- `MwDataGridView`
 
 ## Quick Example
 
@@ -56,13 +62,51 @@ var pictureBox = new MwPictureBox
     Height = 80
 };
 
+var comboBox = new MwComboBox
+{
+    PlaceholderText = "Select printer",
+    IconSize = 20,
+    IconGap = 10,
+    Width = 360
+};
+
+comboBox.AddItems(new object[]
+{
+    "ZDesigner ZD420-203dpi ZPL",
+    "Microsoft Print to PDF",
+    "Canon LBP6030"
+});
+
+comboBox.SelectedIndex = 0;
+
+var grid = new MwDataGridView
+{
+    HeaderBackColor = Color.White,
+    RowBackColor = Color.White,
+    AlternateRowBackColor = Color.FromArgb(248, 250, 252),
+    GridLineColor = Color.FromArgb(226, 232, 240),
+    EmptyBackColor = Color.White,
+    ModernRowHeight = 50,
+    ModernHeaderHeight = 44,
+    Radius = 8,
+    Dock = DockStyle.Fill
+};
+
+grid.Columns.Add("StudentNo", "Student No");
+grid.Columns.Add("FirstName", "First Name");
+grid.Columns.Add("LastName", "Last Name");
+grid.Columns.Add("Status", "Status");
+
+grid.Rows.Add("12345678910", "Ahmet", "Yilmaz", "Active");
+
+
 Project Status
 
 This project is currently in early development.
 
 Current version:
 
-v0.3.0
+v0.4.0
 Roadmap
 Add MwComboBox
 Add MwStatusBar
