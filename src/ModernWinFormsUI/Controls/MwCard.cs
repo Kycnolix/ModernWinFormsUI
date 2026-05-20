@@ -73,13 +73,35 @@ public class MwCard : Panel
 
     }
 
+    private Color GetEffectiveParentBackColor()
+    {
+        Control? currentParent = Parent;
+
+        while (currentParent is not null)
+        {
+            if (currentParent is MwCard parentCard)
+                return parentCard.CardBackColor;
+
+            if (currentParent.BackColor != Color.Transparent &&
+                currentParent.BackColor != Color.Empty)
+            {
+                return currentParent.BackColor;
+            }
+
+            currentParent = currentParent.Parent;
+        }
+
+        return MwColors.Page;
+    }
+
     public MwCard()
     {
         SetStyle(
             ControlStyles.UserPaint |
             ControlStyles.AllPaintingInWmPaint |
             ControlStyles.OptimizedDoubleBuffer |
-            ControlStyles.ResizeRedraw,
+            ControlStyles.ResizeRedraw |
+            ControlStyles.SupportsTransparentBackColor,
             true
         );
 
@@ -149,7 +171,7 @@ public class MwCard : Panel
         var graphics = e.Graphics;
         graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-        graphics.Clear(Parent?.BackColor ?? MwColors.Page);
+        graphics.Clear(GetEffectiveParentBackColor());
 
         var rect = new Rectangle(0, 0, Width - 1, Height - 1);
 

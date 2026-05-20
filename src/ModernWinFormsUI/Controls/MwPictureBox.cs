@@ -360,9 +360,13 @@ public class MwPictureBox : Control
         if (!Enabled)
             return MwColors.DisabledBackground;
 
+
+        if (PictureBackColor == Color.Transparent || PictureBackColor == Color.Empty)
+            return GetEffectiveParentBackColor();
+
         return PictureBackColor;
     }
-
+    
     private Color GetBorderColor()
     {
         if (!Enabled)
